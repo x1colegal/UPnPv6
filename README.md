@@ -113,6 +113,14 @@ Optional gateway override:
 python3 upnpv6_client.py --unalocate-port 8080 --gateway 192.168.60.1
 ```
 
+## Why use IPv4 for Control?
+
+The forwarded destination is still IPv6, because the project is meant for NAT66-style IPv6 forwarding.
+
+The control channel uses IPv4 because scanning private IPv6 space would take far too long in practice. I wanted the client to be able to scan private router addresses quickly, and scanning IPv4 ranges is much faster and much more practical than trying to brute-force private IPv6 addresses.
+
+That is why the client scans IPv4 router candidates for the control server, while the actual forwarded target remains IPv6.
+
 ## Security model
 
 1. The client talks to the router over IPv4 on TCP `255`.
